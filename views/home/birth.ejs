@@ -1,0 +1,331 @@
+<%- include('../_partials/_header') %>
+
+  <h1>Birth Records</h1>
+
+  <br>
+  <br>
+
+  <div class="container">
+
+    <div class="input-group d-flex justify-content-end">
+      <input type="text" placeholder="Search..." aria-label="Username" aria-describedby="input-group-button-right">
+      <button type="button" class="btn btn-outline-dark" id="input-group-button-right">Search</button>
+    </div>
+
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addBirthRecord">Record New
+      Birth Record</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addBirthRecord" tabindex="-1" aria-labelledby="recordBirthModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="recordBirthModal">Register New Birth</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addNewBirthRecordForm" action="#" method="post">
+              <div class="mb-3">
+                <label for="RecordBirthIdFieldLabel" class="form-label">Identification Number</label>
+                <input type="text" class="form-control" id="recordBirthIdField" aria-describedby="recordBirthIdfieldtext" disabled>
+                <div id="recordBirthIdfieldtext" class="form-text">This Identification Number is auto generated.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthnameFieldLabel" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nameField">
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthsurnameFieldLabel" class="form-label">Surname</label>
+                <input type="text" class="form-control" id="RecordBirthsurnameField">
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthgenderFieldLabel" class="form-label">Gender</label>
+                <select class="form-select" id="RecordBirthgenderField">
+                  <option selected>Gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthDOBFieldLabel" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" id="RecordBirthDOBField">
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthcitizenshipFieldLabel" class="form-label">Cizitenship</label>
+                <select class="form-select" id="RecordBirthcitizenshipField">
+                  <option selected>Cizitenship</option>
+                  <option value="Citizen">Citizen</option>
+                  <option value="Resident">Resident</option>
+                  <option value="Foreigner">Foreigner</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthmotherFieldLabel" class="form-label">Mother</label>
+                <input class="form-control" list="RecordBirthMotherlistOptions" id="RecordBirthMotherDataList" placeholder="Type to search...">
+                <datalist id="RecordBirthMotherlistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="RecordBirthFatherFieldLabel" class="form-label">Father</label>
+                <input class="form-control" list="RecordBirthFatherdatalistOptions" id="RecordBirthFatherDataList" placeholder="Type to search...">
+                <datalist id="RecordBirthFatherdatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" id="RecordBirthSaveBtn">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addEditRecord">Edit Birth
+      Record</button>
+    <div class="modal fade" id="addEditRecord" tabindex="-1" aria-labelledby="EditBirthModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="EditBirthModalLabel">Edit Birth Record</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="EditBirthidFieldLabel" class="form-label">Identification Number</label>
+                <input type="text" class="form-control" id="EditBirthidField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthnameFieldLabel" class="form-label">Name</label>
+                <input type="text" class="form-control" id="EditBirthnameField">
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthsurnameFieldLabel" class="form-label">Surname</label>
+                <input type="text" class="form-control" id="EditBirthsurnameField">
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthgenderFieldLabel" class="form-label">Gender</label>
+                <select class="form-select" id="EditBirthgenderField">
+                  <option selected>Gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthdateFieldLabel" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" id="EditBirthDOBdateField">
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthcitizenshipFieldLabel" class="form-label">Cizitenship</label>
+                <select class="form-select" id="EditBirthcitizenshipField">
+                  <option selected>Cizitenship</option>
+                  <option value="Citizen">Citizen</option>
+                  <option value="Resident">Resident</option>
+                  <option value="Foreigner">Foreigner</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthmotherFieldLabel" class="form-label">Mother</label>
+                <input class="form-control" list="EditBirthMotherdatalistOptions" id="EditBirthMotherDataList" placeholder="Type to search...">
+                <datalist id="EditBirthMotherdatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="EditBirthFatherFieldLabel" class="form-label">Father</label>
+                <input class="form-control" list="EditBirthFatherdatalistOptions" id="EditBirthFatherDataList" placeholder="Type to search...">
+                <datalist id="EditBirthFatherdatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-dark mr-1">Delete Birth Record</button>
+    
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#recordDeath">Record Death Record</button>
+    <div class="modal fade" id="recordDeath" tabindex="-1" aria-labelledby="recordDeathModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="recordDeathModalLabel">Record Death</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recordDeathidFieldLabel" class="form-label">Identification Number</label>
+                <input type="text" class="form-control" id="recordDeathidField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathnameFieldLabel" class="form-label">Name</label>
+                <input type="text" class="form-control" id="recordDeathnameField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathsurnameFieldLabel" class="form-label">Surname</label>
+                <input type="text" class="form-control" id="recordDeathsurnameField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathgenderFieldLabel" class="form-label">Gender</label>
+                <input type="text" class="form-control" id="recordDeathgenderField" disabled>
+                <!--<select class="form-select" id="recordDeathgenderField" disabled>
+                  <option selected>Gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>-->
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathDOBFieldLabel" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" id="recordDeathDOBdateField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathDODFieldLabel" class="form-label">Date Of Dirth</label>
+                <input type="date" class="form-control" id="recordDeathDODdateField">
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathcitizenshipFieldLabel" class="form-label">Cizitenship</label>
+                <input type="text" class="form-control" id="recordDeathcitizenshipField" disabled>
+                <!--<select class="form-select" id="recordDeathcitizenshipField" Disabled>
+                  <option selected>Cizitenship</option>
+                  <option value="Citizen">Citizen</option>
+                  <option value="Resident">Resident</option>
+                  <option value="Foreigner">Foreigner</option>
+                </select>-->
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathmotherFieldLabel" class="form-label">Mother</label>
+                <input type="text" class="form-control" id="recordDeathMotherDataList" disabled>
+                <!--<input class="form-control" list="recordDeathMotherlistOptions" id="recordDeathMotherDataList" placeholder="Type to search...">
+                <datalist id="recordDeathMotherlistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>-->
+              </div>
+
+              <div class="mb-3">
+                <label for="recordDeathfatherFieldLabel" class="form-label">Father</label>
+                <input type="text" class="form-control" id="recordDeathFatherDataList" disabled>
+                <!--<input class="form-control" list="recordDeathFatherlistOptions" id="recordDeathFatherDataList" placeholder="Type to search...">
+                <datalist id="recordDeathFatherlistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>-->
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <br>
+  <br>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Cizitenship</th>
+        <th scope="col">Mother</th>
+        <th scope="col">Father</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>Mark</td>
+        <td>Otto</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%- include('../_partials/_footer') %>

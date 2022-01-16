@@ -1,0 +1,231 @@
+<%- include('../_partials/_header') %>
+
+    <h1>Marraige Records</h1>
+    <br>
+    <br>
+
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addMarraigeRecord">Record New Marriage</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addMarraigeRecord" tabindex="-1" aria-labelledby="addMarraigeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addMarraigeModalLabel">Register New Marraige</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="addMarraigeidFieldLabel" class="form-label">Marraige Identification Number</label>
+                <input type="text" class="form-control" id="addMarraigeidField" aria-describedby="addMarraigeidfieldtext" disabled>
+                <div id="addMarraigeidfieldtext" class="form-text">This number is auto generated.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="addMarraigeHusbandFieldLabel" class="form-label">Huband</label>
+                <input class="form-control" list="addMarraigeHusbandlistOptions" id="addMarraigeHusbandDataList" placeholder="Type to search...">
+                <datalist id="addMarraigeHusbandlistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="addMarraigeWifeFieldLabel" class="form-label">Wife</label>
+                <input class="form-control" list="addMarraigeWifedatalistOptions" id="addMarraigeWifeDataList" placeholder="Type to search...">
+                <datalist id="addMarraigeWifedatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="addMarraigeDOMdateFieldLabel" class="form-label">Date Of Marraige</label>
+                <input type="date" class="form-control" id="addMarraigeDOMdateField">
+              </div>              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#editMarraigeRecord">Edit Marriage Record</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editMarraigeRecord" tabindex="-1" aria-labelledby="editMarraigeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editMarraigeModalLabel">Edit Marraige Record</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="editMarraigeidFieldLabel" class="form-label">Marraige Identification Number</label>
+                <input type="text" class="form-control" id="editMarraigeidField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="editMarraigeHusbandFieldLabel" class="form-label">Huband</label>
+                <input class="form-control" list="editMarraigeHusbanddatalistOptions" id="editMarraigeHusbandDataList" placeholder="Type to search...">
+                <datalist id="editMarraigeHusbanddatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="editMarraigeWifeFieldLabel" class="form-label">Wife</label>
+                <input class="form-control" list="editMarraigeWifedatalistOptions" id="editMarraigeWifeDataList" placeholder="Type to search...">
+                <datalist id="editMarraigeWifedatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="editMarraigeDOMdateFieldLabel" class="form-label">Date Of Marraige</label>
+                <input type="date" class="form-control" id="editMarraigeDOMdateField">
+              </div>
+              <div class="mb-3">
+                <label for="editMarraigeDivorcedateFieldLabel" class="form-label">Date Of Divorce</label>
+                <input type="date" class="form-control" id="editMarraigeDivorcedateField">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-dark mr-1">Delete Marraige Record</button>
+
+    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addDivorceRecord">Record Divorce</button>
+
+     <!-- Modal -->
+     <div class="modal fade" id="addDivorceRecord" tabindex="-1" aria-labelledby="addDivorceModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addDivorceModalLabel">Register Divorce</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="addDivorceidFieldLabel" class="form-label">Marraige Identification Number</label>
+                <input type="text" class="form-control" id="addDivorceidField" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="addDivorceHusbandFieldLabel" class="form-label">Huband</label>
+                <input type="text" class="form-control" id="addDivorceHusbandDataList" disabled>
+                <!--<input class="form-control" list="addDivorceHusbanddatalistOptions" id="addDivorceHusbandDataList" placeholder="Type to search..." disabled>
+                <datalist id="addDivorceHusbanddatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>-->
+              </div>
+
+              <div class="mb-3">
+                <label for="addDivorceWifeFieldLabel" class="form-label">Wife</label>
+                <input type="text" class="form-control" id="addDivorceWifeDataList" disabled>
+                <!--<input class="form-control" list="addDivorceWifedatalistOptions" id="addDivorceWifeDataList" placeholder="Type to search..." disabled>
+                <datalist id="addDivorceWifedatalistOptions">
+                  <option value="San Francisco">
+                  <option value="New York">
+                  <option value="Seattle">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                </datalist>-->
+              </div>
+
+              <div class="mb-3">
+                <label for="addDivorceDOMdateFieldLabel" class="form-label">Date Of Marraige</label>
+                <input type="date" class="form-control" id="addDivorceDOMdateField" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="addDivorceDivorcedateFieldLabel" class="form-label">Date Of Divorce</label>
+                <input type="date" class="form-control" id="addDivorceDivorcedateField">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Save</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="input-group-button-right">
+        <button type="button" class="btn btn-outline-dark" id="input-group-button-right">Search</button>
+    </div>
+    
+    <br>
+    <br>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Huband</th>
+            <th scope="col">Wife</th>
+            <th scope="col">Date of Marraige</th>
+            <th scope="col">Date of Divorce</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Otto</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Otto</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Otto</td>
+          </tr>
+        </tbody>
+      </table>
+
+<%- include('../_partials/_footer') %>
