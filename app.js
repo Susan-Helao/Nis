@@ -31,12 +31,12 @@ db.sequelize.sync().then(result => {
  */
 
 //Create a new Person Record
-app.post('/create', person.create)
+//app.post('/create', person.create)
 //Create a new Marraige Record
 // app.post('/', marraige.create)
 
 // //Retrieve all Person Records
-// app.get('/', person.findAll)
+ app.get('/getallpeople', person.findAll)
 // //Retrieve all Marraige Records
 // app.get('/', marraige.findAll)
 
