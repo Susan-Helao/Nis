@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser  = require("body-parser");
 const path = require('path');
 
 const app = express();
@@ -6,7 +7,7 @@ const app = express();
 
 const person = require("./controllers/nis-personController")
 // const marraige = require("./controllers/nis-personController")
-app.use(express.json)
+app.use(bodyParser.json({limit: '3mb'}))
 app.set("port", process.env.PORT || 5000);
 
 app.set('views', path.join(__dirname, 'views'));

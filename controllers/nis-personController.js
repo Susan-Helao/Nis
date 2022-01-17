@@ -9,8 +9,12 @@ const Op = db.Sequelize;
  * 
  */
 //Create and Save a new person
+
+// const sammy = await nis.create({id: 1, firstName: "Sammy", surname: "Doe", gender: "Male", dateOfBirth: 2022-01-14})
+
+
 console.log("IT REACHED HERE")
-/*exports.create = (req, res) => 
+exports.create = (req, res) => 
 {
     console.log('create')
     //validate the request
@@ -45,9 +49,7 @@ console.log("IT REACHED HERE")
             message: err.message
         })
     })
-
-    return person
-};*/
+};
 
 //Retrieve all People from the database
 exports.findAll = (req, res) => 
@@ -68,7 +70,7 @@ exports.findAll = (req, res) =>
     console.log(res);
 };
 
-/*//Retrieve one Person from the database
+//Retrieve one Person from the database
 exports.findOne = (req, res) => 
 {
     const id = req.params.id;
@@ -178,4 +180,3 @@ exports.findAllDeadpeople = (req, res) =>
         });
     });
 };
-*/
