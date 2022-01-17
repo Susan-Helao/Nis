@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-//const routes = require('./routes');
+//const routes = require('./routes/');
 
 const person = require("./controllers/nis-personController")
 // const marraige = require("./controllers/nis-personController")
@@ -13,8 +13,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //app.use(routes);
-// app.use("/", require('./routes/web'));
-// app.use("/api", require('./routes/api'));
+app.use("/", require('./routes/web'));
+app.use("/api", require('./routes/api'));
 
 //DB Stuff
 
@@ -23,7 +23,7 @@ const db = require('./model/db_connection');
 db.sequelize.sync().then(result => {
     // console.log(result);
 }).catch(err => {
-    // console.log(err);
+    //console.log(err);
 });
 
 /**

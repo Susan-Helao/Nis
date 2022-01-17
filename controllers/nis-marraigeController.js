@@ -10,6 +10,8 @@ const Op = db.Sequelize;
  * 
  */
 //Create and Save a new marraige
+
+
 exports.create = (req, res) => 
 {
     //validate the request

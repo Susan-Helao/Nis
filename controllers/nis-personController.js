@@ -9,6 +9,11 @@ const Op = db.Sequelize;
  * 
  */
 //Create and Save a new person
+
+const sammy = await nis.create({id: 1, firstName: "Sammy", surname: "Doe", gender: "Male", dateOfBirth: 2022-01-14})
+
+/*
+console.log("IT REACHED HERE")
 exports.create = (req, res) => 
 {
     console.log('create')
@@ -45,7 +50,7 @@ exports.create = (req, res) =>
         })
     })
 };
-
+/*
 //Retrieve all People from the database
 exports.findAll = (req, res) => 
 {
@@ -173,3 +178,4 @@ exports.findAllDeadpeople = (req, res) =>
         });
     });
 };
+*/
