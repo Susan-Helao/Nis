@@ -204,27 +204,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
-          </tr>
+          <% allMarraiges.forEach(function(marraige) {%>
+            <tr>
+              <th scope="row"><%=marraige.id %></th>
+              <td><%=marraige.husband %></td>
+              <td><%=marraige.wife %></td>
+              <td><%=marraige.dateOfMarraige %></td>
+              <td><%=marraige.dateOfDivorce %></td>
+            </tr>
+            <%});%>
         </tbody>
       </table>
 

@@ -16,12 +16,16 @@ const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER, dbConfig.PASSWORD,
         }
     });
 
-    const db ={};
+    var db ={};
 
     db.Sequelize= Sequelize;
     db.sequelize = sequelize;
     db.person = require("./birthRecords")(sequelize,Sequelize)
     db.marraige = require("./marraigeRecords")(sequelize,Sequelize)
+    db.marraigeLink = require("./MarraigeLinkTable")(sequelize, Sequelize)
+
+    db.marraige.associate(db)
+    db.marraigeLink.associate(db)
 
     module.exports = db;
     
@@ -29,7 +33,7 @@ const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER, dbConfig.PASSWORD,
     /*
 let sequelize = new Sequelize('nis', 'root', 'root');
 
-const con = mysql.createConnection({
+const con = mysql.createConnction({
     host: "localhost",
     user: "root",
     password: "root",

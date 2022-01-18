@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     {
         id:
         {
+            autoIncrement: true,
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true
@@ -38,20 +39,27 @@ module.exports = (sequelize, Sequelize) => {
         },
         dateOfMarraige:
         {
-            type: Sequelize.DATE,
+            type: Sequelize.DATEONLY,
             allowNull: false
         },
         dateOfDivorce:
         {
-            type: Sequelize.DATE,
+            type: Sequelize.DATEONLY,
             allowNull: true
         }
 
         
    });
 
-  // marraigeRecords.belongsToMany(personRecords);
+  //arraigeRecords.belongsToMany(personRecords);
 
+  marraigeRecords.associate= function(models)
+  {
+      marraigeRecords.hasMany(models.marraigeLink, {
+          foreignKey: "marraigeID",
+          as: "LINK"
+      })
+  }
    return marraigeRecords;
 }
 

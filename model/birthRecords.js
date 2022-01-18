@@ -1,3 +1,4 @@
+const { person } = require('./db_connection');
 const db = require('./db_connection');
 
 const sequelize = db.sequelize;
@@ -8,6 +9,7 @@ module.exports = (sequelize, Sequelize) => {
     {
         id:
         {
+            autoIncrement: true,
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true
@@ -29,12 +31,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         dateOfBirth:
         {
-            type: Sequelize.DATE,
+            type: Sequelize.DATEONLY,
             allowNull: false
         },
         dateOfDeath:
         {
-            type: Sequelize.DATE,
+            type: Sequelize.DATEONLY,
             allowNull: true
         },
         citizenship:
@@ -63,6 +65,13 @@ module.exports = (sequelize, Sequelize) => {
             }
         }
     }); 
-
-   // personRecords.belongsToMany(personRecords);
+   /* personRecords.associate = function(models)
+    {
+        person.belongsTo(models.marraige,{
+            foreignKey: ''
+        })
+        
+    }*/
+    
+   return personRecords;
 }

@@ -1,7 +1,10 @@
 const db = require('../model/db_connection')
+
 const Person = db.person;
 //const Marraige = db.marraige;
 const Op = db.Sequelize;
+
+const bodyParser  = require("body-parser");
 
 /**
  * 
@@ -13,11 +16,34 @@ const Op = db.Sequelize;
 // const sammy = await nis.create({id: 1, firstName: "Sammy", surname: "Doe", gender: "Male", dateOfBirth: 2022-01-14})
 
 
-console.log("IT REACHED HERE")
-exports.create = (req, res) => 
+//console.log("IT REACHED HERE")
+exports.create = async (req, res) => 
 {
-    console.log('create')
+    
+    /*console.log('create')
     //validate the request
+    console.log(req.body)
+
+    return Person.create({
+        
+        id: req.body.id,
+        firstName: req.body.firstName,
+        surname: req.body.surname,
+        gender: req.body.gender,
+        dateOfBirth: req.body.dateOfBirth,
+        dateOfDeath: req.body.dateOfDeath,
+        citizenship: req.body.citizenship,
+        mother: req.body.mother,
+        father: req.body.father
+    }).then (function (Person) {
+        if(Person){
+            res.send(Person);
+        }
+        else{
+            res.status(400).send("ERROR INSERTING NEW RECORD")
+        }
+    })*/
+
     if (!req.body.id)
     {
         res.status(400).send({
@@ -48,7 +74,7 @@ exports.create = (req, res) =>
         res.status(500).send({
             message: err.message
         })
-    })
+    });
 };
 
 //Retrieve all People from the database
@@ -67,7 +93,7 @@ exports.findAll = (req, res) =>
         });
     });
 
-    console.log(res);
+    ;
 };
 
 //Retrieve one Person from the database
@@ -92,6 +118,8 @@ exports.findOne = (req, res) =>
             message: "Error retrieving Person with ID = " + id
         });
     });
+
+    return res;
 };
 
 //Update a Person by the id in the request

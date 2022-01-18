@@ -9,13 +9,13 @@ const Op = db.Sequelize;
  * THIS IS FOR THE MARRAIGW TABLE
  * 
  */
-//Create and Save a new marraige
+//Create and Save a new marraig
 
 
 exports.create = (req, res) => 
 {
     //validate the request
-    if (!req.body.title)
+    if (!req.body.husband)
     {
         res.status(400).send({
              message: "Content can not be empty!"});
@@ -32,10 +32,12 @@ exports.create = (req, res) =>
         dateOfDivorce: req.body.dateOfDivorce
     }
 
-    //save the person in the database
+    //save the person in the databas
     Marraige.create(marraige)
     .then(data => {
         res.send(data);
+        db.marraigeLink.create({personID: marraige.husband, marraigeID: data.id});
+        db.marraigeLink.create({personID: marraige.wife, marraigeID: data.id});
     })
     .catch(err => {
         res.status(500).send({
@@ -50,18 +52,22 @@ exports.findAll = (req, res) =>
     const id = req.query.dateOfDeath;
     var condition = id ? {id: {[Op.like]: `%${id}%`}} : null;
 
-    Person.findAll({where: condition})
+
+    Marraige.findAll({where: condition, include:  {model: db.marraigeLink, as: "LINK"}})
     .then(data => {
+        console.log(data);
         res.send(data);
+        //return dat;
     })
     .catch(err => {
         res.status(500).send({
             message: err.message
         });
     });
+   // return dat
 };
 
-//Retrieve one Marraige record from the database
+//Retrieve one Marraige record from the databas
 exports.findOne = (req, res) => 
 {
     const id = req.params.id;

@@ -1,7 +1,15 @@
 const express = require('express');
 
-const person = require("../../controllers/nis-personController")
-const marraige = require("../../controllers/nis-marraigeController")
+const db = require('../../model/db_connection')
+
+const Person = db.person;
+const Marraige = db.marraige;
+const Op = db.Sequelize;
+
+const bodyParser  = require("body-parser");
+
+/*const person = require("../../controllers/nis-personController")
+const marraige = require("../../controllers/nis-marraigeController")*/
 
 const router = express.Router();
 
@@ -22,11 +30,40 @@ router.get('/index', function(req, res)
 //Records
 router.get('/birth', function(req, res)
 {
-    res.render('home/birth');
+    const identity = req.query.id;
+    var condition = identity ? {identity: {[Op.like]: `%${identity}%`}} : null;
+
+    Person.findAll({where: condition})
+    .then(data => {
+       // res.send(data);
+       console.log("HEREEEEEE IS THEEEEE THE DAAAAAAATAAAAAAAAAA: ", data);
+        res.render('home/birth',{allPeople: data});
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message
+        });
+    });
+
+    //res.render('home/birth');
 });
 router.get('/marraige', function(req, res)
 {
-    res.render('home/marraige');
+    const id = req.query.dateOfDeath;
+    var condition = id ? {id: {[Op.like]: `%${id}%`}} : null;
+
+    Marraige.findAll({where: condition})
+    .then(data => {
+       // console.log("HEREEEEEE IS THEEEE THE DAT: " ,data.getDataValue('dateOfMarraige'));
+        //console.log(data instanceof data)
+       res.render('home/marraige',{allMarraiges: data});
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message
+        });
+    });
+    
 });
 /*router.get('/death', function(req, res)
 {
@@ -46,6 +83,24 @@ router.get('/clan', function(req, res)
 {
     res.render('home/clan');
 });
+
+/*router.get('/findAllPeople', function(req, res)  
+{
+    const identity = req.query.id;
+    var condition = identity ? {identity: {[Op.like]: `%${identity}%`}} : null;
+
+    Person.findAll({where: condition})
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message
+        });
+    });
+
+    return res;
+});*/
 
 /*
 //Create a new Person Record
