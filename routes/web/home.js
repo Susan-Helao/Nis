@@ -75,8 +75,12 @@ router.post('/addNewBirthRecordForm', async (req, res) => {
 router.post('/deleteRecord', async (req, res) => {
     
     const reqestbody = req.body 
+    console.log("1")
+    
     const url = path.join('http://localhost:5000/deletOnePerson', reqestbody.id)
-    data = await axios.post(url,reqestbody).then( async(data) => {
+    console.log("2")
+    data = await axios.delete(url,reqestbody).then( async(data) => {
+        console.log("3")
         data = await axios.get('http://localhost:5000/getAllPeople')
         res.render('home/birth',{allPeople: data.data});
     }); //comment
