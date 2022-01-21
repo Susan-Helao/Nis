@@ -79,7 +79,7 @@ router.post('/deleteRecord', async (req, res) => {
     data = await axios.post(url,reqestbody).then( async(data) => {
         data = await axios.get('http://localhost:5000/getAllPeople')
         res.render('home/birth',{allPeople: data.data});
-    });
+    }); //comment
     
 
     //const responcebody = res.body   
