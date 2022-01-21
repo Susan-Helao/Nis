@@ -5,17 +5,13 @@
   <br>
   <br>
 
-  <div class="container">
+  <div class="container">  
 
-    <div class="input-group d-flex justify-content-end">
-      <input type="text" placeholder="Search..." aria-label="Username" aria-describedby="input-group-button-right">
-      <button type="button" class="btn btn-outline-dark" id="input-group-button-right">Search</button>
-    </div>
-
+    <!-- Add Birth Record Button -->
     <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addBirthRecord">Record New
       Birth Record</button>
 
-    <!-- Modal -->
+    <!-- Add Birth Record Modal -->
     <div class="modal fade" id="addBirthRecord" tabindex="-1" aria-labelledby="recordBirthModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -24,27 +20,27 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="addNewBirthRecordForm" action="#" method="post">
+            <form id="addNewBirthRecordForm" action="/addNewBirthRecordForm" method="post">
               <div class="mb-3">
+                <% var idNum = allPeople.length + 1;%>
                 <label for="RecordBirthIdFieldLabel" class="form-label">Identification Number</label>
-                <input type="text" class="form-control" id="recordBirthIdField" aria-describedby="recordBirthIdfieldtext" disabled>
+                <input type="text" class="form-control" id="nameField" name="id" value=<%=idNum%> readonly>
                 <div id="recordBirthIdfieldtext" class="form-text">This Identification Number is auto generated.</div>
               </div>
 
               <div class="mb-3">
-                <label for="RecordBirthnameFieldLabel" class="form-label">Name</label>
-                <input type="text" class="form-control" id="nameField">
+                <label for="RecordBirthnameFieldLabel" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="nameField" name="firstName" required>
               </div>
 
               <div class="mb-3">
                 <label for="RecordBirthsurnameFieldLabel" class="form-label">Surname</label>
-                <input type="text" class="form-control" id="RecordBirthsurnameField">
+                <input type="text" class="form-control" id="RecordBirthsurnameField" name="surname" required>
               </div>
 
               <div class="mb-3">
                 <label for="RecordBirthgenderFieldLabel" class="form-label">Gender</label>
-                <select class="form-select" id="RecordBirthgenderField">
-                  <option selected>Gender</option>
+                <select class="form-select" id="RecordBirthgenderField" name="gender">
                   <option value="Female">Female</option>
                   <option value="Male">Male</option>
                 </select>
@@ -52,55 +48,74 @@
 
               <div class="mb-3">
                 <label for="RecordBirthDOBFieldLabel" class="form-label">Date Of Birth</label>
-                <input type="date" class="form-control" id="RecordBirthDOBField">
+                <input type="date" class="form-control" id="RecordBirthDOBField" name="dateOfBirth" required>
               </div>
 
               <div class="mb-3">
                 <label for="RecordBirthcitizenshipFieldLabel" class="form-label">Cizitenship</label>
-                <select class="form-select" id="RecordBirthcitizenshipField">
-                  <option selected>Cizitenship</option>
+                <select class="form-select" id="RecordBirthcitizenshipField" name="citizenship">
                   <option value="Citizen">Citizen</option>
                   <option value="Resident">Resident</option>
                   <option value="Foreigner">Foreigner</option>
                 </select>
               </div>
-
+ 
               <div class="mb-3">
                 <label for="RecordBirthmotherFieldLabel" class="form-label">Mother</label>
-                <input class="form-control" list="RecordBirthMotherlistOptions" id="RecordBirthMotherDataList" placeholder="Type to search...">
-                <datalist id="RecordBirthMotherlistOptions">
-                  <option value="San Francisco">
-                  <option value="New York">
-                  <option value="Seattle">
-                  <option value="Los Angeles">
-                  <option value="Chicago">
+                <input class="form-control" list="RecordBirthMotherlistOptions" id="RecordBirthMotherDataList" placeholder="Type to search..." name="mother">
+                <datalist id="RecordBirthMotherlistOptions"> 
+                  <% for(var i= 0; i < allPeople.length; i++) {%>
+                    <%
+                       if(allPeople[i].gender === "Female")
+                       {
+                        var person = "";
+                        var id = allPeople[i].id;
+                        var firstName = allPeople[i].firstName;
+                        var lastName = allPeople[i].surname;
+                        var person = firstName+ " " + lastName;                     
+                    %>
+                    <option value=<%=id%>> <%=person%> </option>
+                    <%}%>                    
+                  <%};%>
                 </datalist>
               </div>
 
               <div class="mb-3">
                 <label for="RecordBirthFatherFieldLabel" class="form-label">Father</label>
-                <input class="form-control" list="RecordBirthFatherdatalistOptions" id="RecordBirthFatherDataList" placeholder="Type to search...">
+                <input class="form-control" list="RecordBirthFatherdatalistOptions" id="RecordBirthFatherDataList" placeholder="Type to search..." name="father">
                 <datalist id="RecordBirthFatherdatalistOptions">
-                  <option value="San Francisco">
-                  <option value="New York">
-                  <option value="Seattle">
-                  <option value="Los Angeles">
-                  <option value="Chicago">
+                  <% for(var i= 0; i < allPeople.length; i++) {%>
+                    <%
+                       if(allPeople[i].gender === "Male")
+                       {
+                        var person = "";
+                        var id = allPeople[i].id;
+                        var firstName = allPeople[i].firstName;
+                        var lastName = allPeople[i].surname;
+                        var person = firstName+ " " + lastName;
+                    %>
+                        
+                    
+                    <option value=<%=id%>> <%=person%> </option>    
+                       <%}%>               
+                  <%};%>
                 </datalist>
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-dark" id="RecordBirthSaveBtn" data-dismiss="model">Submit</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Exit</button>
               </div>
 
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-dark" id="RecordBirthSaveBtn">Save</button>
-            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-          </div>
+          
         </div>
       </div>
     </div>
 
-    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addEditRecord">Edit Birth
-      Record</button>
+    <!-- <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addEditRecord">Edit Birth
+      Record</button
     <div class="modal fade" id="addEditRecord" tabindex="-1" aria-labelledby="EditBirthModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -183,8 +198,11 @@
     </div>
 
     <button type="button" class="btn btn-dark mr-1">Delete Birth Record</button>
-    
-    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#recordDeath">Record Death Record</button>
+     -->
+
+     <!-- Add Death Record Button -->
+    <!-- <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#recordDeath">Record Death Record</button>
+    Add Death Record Modal 
     <div class="modal fade" id="recordDeath" tabindex="-1" aria-labelledby="recordDeathModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -212,11 +230,11 @@
               <div class="mb-3">
                 <label for="recordDeathgenderFieldLabel" class="form-label">Gender</label>
                 <input type="text" class="form-control" id="recordDeathgenderField" disabled>
-                <!--<select class="form-select" id="recordDeathgenderField" disabled>
+                <select class="form-select" id="recordDeathgenderField" disabled>
                   <option selected>Gender</option>
                   <option value="Female">Female</option>
                   <option value="Male">Male</option>
-                </select>-->
+                </select>
               </div>
 
               <div class="mb-3">
@@ -232,38 +250,38 @@
               <div class="mb-3">
                 <label for="recordDeathcitizenshipFieldLabel" class="form-label">Cizitenship</label>
                 <input type="text" class="form-control" id="recordDeathcitizenshipField" disabled>
-                <!--<select class="form-select" id="recordDeathcitizenshipField" Disabled>
+                <select class="form-select" id="recordDeathcitizenshipField" Disabled>
                   <option selected>Cizitenship</option>
                   <option value="Citizen">Citizen</option>
                   <option value="Resident">Resident</option>
                   <option value="Foreigner">Foreigner</option>
-                </select>-->
+                </select>
               </div>
 
               <div class="mb-3">
                 <label for="recordDeathmotherFieldLabel" class="form-label">Mother</label>
                 <input type="text" class="form-control" id="recordDeathMotherDataList" disabled>
-                <!--<input class="form-control" list="recordDeathMotherlistOptions" id="recordDeathMotherDataList" placeholder="Type to search...">
+                <input class="form-control" list="recordDeathMotherlistOptions" id="recordDeathMotherDataList" placeholder="Type to search...">
                 <datalist id="recordDeathMotherlistOptions">
                   <option value="San Francisco">
                   <option value="New York">
                   <option value="Seattle">
                   <option value="Los Angeles">
                   <option value="Chicago">
-                </datalist>-->
+                </datalist>
               </div>
 
               <div class="mb-3">
                 <label for="recordDeathfatherFieldLabel" class="form-label">Father</label>
                 <input type="text" class="form-control" id="recordDeathFatherDataList" disabled>
-                <!--<input class="form-control" list="recordDeathFatherlistOptions" id="recordDeathFatherDataList" placeholder="Type to search...">
+                <input class="form-control" list="recordDeathFatherlistOptions" id="recordDeathFatherDataList" placeholder="Type to search...">
                 <datalist id="recordDeathFatherlistOptions">
                   <option value="San Francisco">
                   <option value="New York">
                   <option value="Seattle">
                   <option value="Los Angeles">
                   <option value="Chicago">
-                </datalist>-->
+                </datalist>
               </div>
 
             </form>
@@ -274,14 +292,24 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
+    <br>
+    <br>
+    
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="input-group-button-right" id="searchBar">
+    </div>
 
   </div>
   <br>
-  <br>
+  
+  <script>
+        
+  </script>
 
-  <table class="table table-hover">
+  <table class="table table-hover" id="birthRecordTable">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -293,25 +321,131 @@
         <th scope="col">Cizitenship</th>
         <th scope="col">Mother</th>
         <th scope="col">Father</th>
+        <th scope="col">Update</th>
+        <th scope="col">Remove</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
+      <% 
+              var father = "";
+              var mother = "";
+          %>
       <% allPeople.forEach(function(person) {%>
+        
+        <% allPeople.forEach(function(people) {%>
+           <% 
+                  
+              if(person.father === people.id) 
+                {
+                  father =  people.firstName + " " + people.surname
+                }
+              if(person.mother === people.id) 
+                {
+                  mother =  people.firstName + " " + people.surname
+                }
+              %>
+            <%});%>
       <tr>
-        <th scope="row"><%=person.id %></th>
-        <td><%=person.firstName %></td>
-        <td><%=person.surname %></td>
-        <td><%=person.gender %></td>
-        <td><%=person.dateOfBirth %></td>
-        <td><%=person.dateOfDeath %></td>
-        <td><%=person.citizenship %></td>
-        <td><%=person.mother %></td>
-        <td><%=person.father %></td>
+        <td scope="row" name="id" class="nr"><%=person.id %></td>
+        <td class = "pt-3-half" contenteditable="false" name="firstName" id="test"><%=person.firstName %></td>
+        <td class = "pt-3-half " contenteditable="false" name="surname"><%=person.surname %></td>
+        <td class = "pt-3-half " contenteditable="false" name="gender"><%=person.gender %></td>
+        <td class = "pt-3-half " contenteditable="false" name="dateOfBirth"><%=person.dateOfBirth %></td>
+        <td class = "pt-3-half " contenteditable="false" name="dateOfDeath"><%=person.dateOfDeath %></td>
+        <td class = "pt-3-half " contenteditable="false" name="citizenship"><%=person.citizenship %></td>
+        <td class = "pt-3-half " contenteditable="false" name="mother"><%=person.mother %> <%=mother %></td>
+        <td class = "pt-3-half " contenteditable="false" name="father"><%=person.father %> <%=father %></td>
+        
+          <td class = "pt-3-half">
+            <span class = "table-update">
+              <button type="button" id="updateBtn"  class=" btn btn-primary btn-rounded btn-sm my-0">Update Record</button>
+            </span>
+          </td>
+          <script>
+            function deleteRow(btn)
+            {
+             // $(btn).closest('tr').removeClass();
+              var row = btn.parentNode.parentNode.parentNode;
+              var rowVal= "";
+              /* for(var i = 0; i < row.cells.length; i++)
+              {                            
+                console.log(row.cells[i].innerHTML);
+                //console.log(rowVal);
+              } */
+
+              var mother = row.cells[7].innerHTML;
+             // console.log("MOTHER: "  + mother);
+              var mother_id = mother.split(' ')[0]
+              //console.log("MOTHER ID: "  + mother_id);
+              var mother_int = parseInt(mother_id)
+
+              var father = row.cells[8].innerHTML;
+              var father_id = father.split(' ')[0];
+              var father_int = parseInt(father_id);
+
+              personID= parseInt(row.cells[0].innerHTML)
+              
+              var data ={
+                id : personID,
+                firstName : row.cells[1].innerHTML,
+                surname : row.cells[2].innerHTML,
+                gender : row.cells[3].innerHTML,
+                dateOfBirth : row.cells[4].innerHTML,
+                dateOfDeath : row.cells[5].innerHTML,
+                citizenship: row.cells[6].innerHTML,
+                mother : mother_int,
+                father : father_int
+              };
+
+              //console.log("HERE IS THE DATA", data)
+
+              
+
+             /* var count = 0;
+              for (var i in row.cells)
+              {
+                console.log("HERE", count, row.cells[i]);
+                //console.log("HERE 2", count, row.rowIndex)
+                //data += 
+                count++;
+                if (count>8)
+                {
+                  break;
+                }
+              }
+              
+              console.log("HEEEEEEEEEEEERRRRRRRRRRRRRREEEEEEEE", row)*/
+              //row.parentNode.removeChild(row);
+
+              
+              /* fetch('/deleteRecord', {
+                method: 'POST',
+                body: data
+              }) */
+
+              console.log("HERE IS THE DATA", data)
+             /*var xhr = new XMLHttpRequest
+             xhr.open('POST', '/deleteRecord' )
+             xhr.send(JSON.stringify(data))*/
+             $.ajax('http://localhost:5000/deleteRecord', {
+               type: 'POST',
+               data: data
+             })
+            }           
+          </script>
+        
+            <td class = "pt-3-half">
+            <span class = "table-remove">
+              <button type="button" onclick="deleteRow(this)" class="btn btn-danger btn-rounded btn-sm my-0">Delete Record</button>
+            </span>
+          </td>           
       </tr>
       <%});%>
       
     </tbody>
   </table>
+
+  
   
 
   <%- include('../_partials/_footer') %>

@@ -14,11 +14,18 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@mysql/xdevapi": "8.0.27",
+    "axios": "^0.25.0",
     "body-parser": "^1.19.1",
+    "bootstrap-select": "^1.13.18",
     "cors": "^2.8.5",
+    "datatables.net-editor": "^2.0.5",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "jquery": "^3.6.0",
+    "material-table": "^1.69.3",
+    "mdb-ui-kit": "^3.10.2",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "path": "^0.12.7",

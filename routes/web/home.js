@@ -1,10 +1,14 @@
+
+const  axios = require('axios');
 const express = require('express');
+const path = require('path');
 
 const db = require('../../model/db_connection')
 
 const Person = db.person;
 const Marraige = db.marraige;
 const Op = db.Sequelize;
+//const path = require('')
 
 const bodyParser  = require("body-parser");
 
@@ -12,7 +16,7 @@ const bodyParser  = require("body-parser");
 const marraige = require("../../controllers/nis-marraigeController")*/
 
 const router = express.Router();
-
+//const urlencoderParser = bodyParser.urlencoded({extended: false});
 
 
 router.get('/', function(req, res) 
@@ -28,41 +32,82 @@ router.get('/index', function(req, res)
 
 
 //Records
-router.get('/birth', function(req, res)
+router.get('/birth', async function(req, res)
 {
-    const identity = req.query.id;
+   /* const identity = req.query.id
     var condition = identity ? {identity: {[Op.like]: `%${identity}%`}} : null;
 
     Person.findAll({where: condition})
     .then(data => {
        // res.send(data);
        console.log("HEREEEEEE IS THEEEEE THE DAAAAAAATAAAAAAAAAA: ", data);
-        res.render('home/birth',{allPeople: data});
+       res.render('home/birth',{allPeople: data});
     })
     .catch(err => {
         res.status(500).send({
             message: err.message
         });
-    });
+    });*/
+
+
+    data = await axios.get('http://localhost:5000/getAllPeople')
+
+    //console.log("Here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : " ,data.data);
+
+    res.render('home/birth',{allPeople: data.data});
 
     //res.render('home/birth');
 });
-router.get('/marraige', function(req, res)
+
+router.post('/addNewBirthRecordForm', async (req, res) => {
+    
+    const reqestbody = req.body 
+    data = await axios.post('http://localhost:5000/createPerson',reqestbody).then( async(data) => {
+        data = await axios.get('http://localhost:5000/getAllPeople')
+        res.render('home/birth',{allPeople: data.data});
+    });
+    console.log("This is it", reqestbody)  
+
+    //const responcebody = res.body   
+   // console.log("This is it", responcebody
+});
+
+router.post('/deleteRecord', async (req, res) => {
+    
+    const reqestbody = req.body 
+    const url = path.join('http://localhost:5000/deletOnePerson', reqestbody.id)
+    data = await axios.post(url,reqestbody).then( async(data) => {
+        data = await axios.get('http://localhost:5000/getAllPeople')
+        res.render('home/birth',{allPeople: data.data});
+    });
+    
+
+    //const responcebody = res.body   
+   console.log("This is it", reqestbody)
+});
+
+router.get('/marraige', async function(req, res)
 {
-    const id = req.query.dateOfDeath;
+    data = await axios.get('http://localhost:5000/getAllMarraiges')
+    personData = await axios.get('http://localhost:5000/getAllPeople')
+    console.log(data.data);
+    console.log("START: ", personData.data);
+    
+    res.render('home/marraige',{allMarraiges: data.data, allPeople: personData.data});
+    /*const id = req.query.dateOfDeath;
     var condition = id ? {id: {[Op.like]: `%${id}%`}} : null;
 
     Marraige.findAll({where: condition})
     .then(data => {
        // console.log("HEREEEEEE IS THEEEE THE DAT: " ,data.getDataValue('dateOfMarraige'));
-        //console.log(data instanceof data)
+        //console.log(data instanceof data
        res.render('home/marraige',{allMarraiges: data});
     })
     .catch(err => {
         res.status(500).send({
             message: err.message
         });
-    });
+    });*/
     
 });
 /*router.get('/death', function(req, res)
@@ -85,7 +130,7 @@ router.get('/clan', function(req, res)
 });
 
 /*router.get('/findAllPeople', function(req, res)  
-{
+
     const identity = req.query.id;
     var condition = identity ? {identity: {[Op.like]: `%${identity}%`}} : null;
 
@@ -99,7 +144,7 @@ router.get('/clan', function(req, res)
         });
     });
 
-    return res;
+    return res
 });*/
 
 /*

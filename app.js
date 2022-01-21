@@ -9,8 +9,9 @@ const app = express();
 const person = require("./controllers/nis-personController")
 const marraige = require("./controllers/nis-marraigeController")
 app.use(bodyParser.json({limit: '3mb'}))
+app.use(bodyParser.urlencoded({ extended: true}))
 
-app.set("port", process.env.PORT || 8000);
+app.set("port", process.env.PORT || 5000);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -46,7 +47,7 @@ app.post('/createPerson', person.create)
  app.post('/createMarraige', marraige.create)
 
 // //Retrieve all Person Records
-//app.get('/getAllPeople', person.findAll)
+app.get('/getAllPeople', person.findAll)
 app.get('/getAllMarraiges', marraige.findAll)
 
 // //Retrieve all Dead Person Records
@@ -71,7 +72,7 @@ app.delete("/deleteOneMarraige/:id", marraige.deleteOne)
 
 // //delete all Person Records
 // app.delete("/", person.deleteAll)
-// //delete all Marraige Records
+// //delete all Marraige Record
 // app.delete("/", marraige.deleteAll)
 
 
@@ -86,9 +87,7 @@ app.delete("/deleteOneMarraige/:id", marraige.deleteOne)
 //     console.log("DROP AND RESYNC);
 // });
 
-// 
-
-app.listen(8000, function() 
+app.listen(5000, function() 
 {
     console.log('Server started on port ' + app.get('port'));
 })

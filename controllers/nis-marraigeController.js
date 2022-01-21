@@ -55,7 +55,7 @@ exports.findAll = (req, res) =>
 
     Marraige.findAll({where: condition, include:  {model: db.marraigeLink, as: "LINK"}})
     .then(data => {
-        console.log(data);
+        //console.log(data);
         res.send(data);
         //return dat;
     })

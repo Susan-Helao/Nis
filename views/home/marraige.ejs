@@ -60,9 +60,9 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#editMarraigeRecord">Edit Marriage Record</button>
+    <!-- <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#editMarraigeRecord">Edit Marriage Record</button>
 
-    <!-- Modal -->
+    
     <div class="modal fade" id="editMarraigeRecord" tabindex="-1" aria-labelledby="editMarraigeModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -117,13 +117,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+<!-- 
+    <button type="button" class="btn btn-dark mr-1">Delete Marraige Record</button> -->
 
-    <button type="button" class="btn btn-dark mr-1">Delete Marraige Record</button>
+    <!-- <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addDivorceRecord">Record Divorce</button>
 
-    <button type="button" class="btn btn-dark mr-1" data-bs-toggle="modal" data-bs-target="#addDivorceRecord">Record Divorce</button>
-
-     <!-- Modal -->
+     
      <div class="modal fade" id="addDivorceRecord" tabindex="-1" aria-labelledby="addDivorceModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -141,27 +141,27 @@
               <div class="mb-3">
                 <label for="addDivorceHusbandFieldLabel" class="form-label">Huband</label>
                 <input type="text" class="form-control" id="addDivorceHusbandDataList" disabled>
-                <!--<input class="form-control" list="addDivorceHusbanddatalistOptions" id="addDivorceHusbandDataList" placeholder="Type to search..." disabled>
+                <input class="form-control" list="addDivorceHusbanddatalistOptions" id="addDivorceHusbandDataList" placeholder="Type to search..." disabled>
                 <datalist id="addDivorceHusbanddatalistOptions">
                   <option value="San Francisco">
                   <option value="New York">
                   <option value="Seattle">
                   <option value="Los Angeles">
                   <option value="Chicago">
-                </datalist>-->
+                </datalist>
               </div>
 
               <div class="mb-3">
                 <label for="addDivorceWifeFieldLabel" class="form-label">Wife</label>
                 <input type="text" class="form-control" id="addDivorceWifeDataList" disabled>
-                <!--<input class="form-control" list="addDivorceWifedatalistOptions" id="addDivorceWifeDataList" placeholder="Type to search..." disabled>
+                <input class="form-control" list="addDivorceWifedatalistOptions" id="addDivorceWifeDataList" placeholder="Type to search..." disabled>
                 <datalist id="addDivorceWifedatalistOptions">
                   <option value="San Francisco">
                   <option value="New York">
                   <option value="Seattle">
                   <option value="Los Angeles">
                   <option value="Chicago">
-                </datalist>-->
+                </datalist>
               </div>
 
               <div class="mb-3">
@@ -180,16 +180,16 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <br>
+    <br>
+    
 
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="input-group-button-right">
-        <button type="button" class="btn btn-outline-dark" id="input-group-button-right">Search</button>
+        <input  id="myMarSearchBar" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="input-group-button-right">
     </div>
     
-    <br>
     <br>
 
     <table class="table table-hover">
@@ -200,19 +200,43 @@
             <th scope="col">Wife</th>
             <th scope="col">Date of Marraige</th>
             <th scope="col">Date of Divorce</th>
+            <th scope="col">Remove</th>
 
           </tr>
         </thead>
-        <tbody>
+        <tbody id="myMarTable">
+          <% 
+              var husband = "";
+              var wife = "";
+          %>
           <% allMarraiges.forEach(function(marraige) {%>
-            <tr>
-              <th scope="row"><%=marraige.id %></th>
-              <td><%=marraige.husband %></td>
-              <td><%=marraige.wife %></td>
-              <td><%=marraige.dateOfMarraige %></td>
-              <td><%=marraige.dateOfDivorce %></td>
-            </tr>
+            <% allPeople.forEach(function(people) {%>
+              <% 
+                  
+                  if(marraige.husband === people.id) 
+                    {
+                      husband =  people.firstName + " " + people.surname
+                    }
+                  if(marraige.wife === people.id) 
+                    {
+                      wife =  people.firstName + " " + people.surname
+                    }
+              %>
             <%});%>
+            <tr>
+              <th scope="row"><%=marraige.id %></th>              
+              <td class = "pt-3-half" contenteditable="true"><%=husband%> </td>              
+              <td class = "pt-3-half" contenteditable="true"><%=wife %> </td>              
+              <td class = "pt-3-half" contenteditable="true"><%=marraige.dateOfMarraige %></td>
+              <td class = "pt-3-half" contenteditable="true"><%=marraige.dateOfDivorce %></td>
+              <td class = "pt-3-half">
+                <span class = "table-remove">
+                  <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Delete Record</button>
+                </span>
+              </td>
+            </tr>
+            
+          <%});%>
         </tbody>
       </table>
 
