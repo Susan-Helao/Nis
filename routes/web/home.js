@@ -73,21 +73,16 @@ router.post('/addNewBirthRecordForm', async (req, res) => {
 });
 
 router.post('/deleteRecord', async (req, res) => {
-    
     const reqestbody = req.body 
-    console.log("1")
-    
-    const url = path.join('http://localhost:5000/deletOnePerson', reqestbody.id)
-    console.log("2")
+
+    const url = 'http://localhost:5000/deletOnePerson/' + reqestbody.id
     data = await axios.delete(url,reqestbody).then( async(data) => {
-        console.log("3")
         data = await axios.get('http://localhost:5000/getAllPeople')
         res.render('home/birth',{allPeople: data.data});
     }); //comment
-    
 
     //const responcebody = res.body   
-   console.log("This is it", reqestbody)
+    console.log("This is it", reqestbody)
 });
 
 router.get('/marraige', async function(req, res)
